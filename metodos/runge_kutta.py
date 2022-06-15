@@ -18,13 +18,13 @@ def runge_kutta(edo, x0, y0, X, h, casas_decimais=5):
     """
 
     # Define dx/dy
-    Y = lambda x, y: eval(edo)
+    dx_dy = lambda x, y: eval(edo)
 
-    # Define as equações do Método de Runge_Kutta
-    K1 = lambda x, y, h: h * Y(x, y)
-    K2 = lambda x, y, h: h * Y(x + h / 2, y + K1(x, y, h) / 2)
-    K3 = lambda x, y, h: h * Y(x + h / 2, y + K2(x, y, h) / 2)
-    K4 = lambda x, y, h: h * Y(x + h, y + K3(x, y, h))
+    # Define as equações do Método de Runge Kutta
+    K1 = lambda x, y, h: h * dx_dy(x, y)
+    K2 = lambda x, y, h: h * dx_dy(x + h / 2, y + K1(x, y, h) / 2)
+    K3 = lambda x, y, h: h * dx_dy(x + h / 2, y + K2(x, y, h) / 2)
+    K4 = lambda x, y, h: h * dx_dy(x + h, y + K3(x, y, h))
     Yk = lambda x, y, h: y + (1 / 6) * (K1(x, y, h) + 2 * K2(x, y, h) + 2 * K3(x, y, h) + K4(x, y, h))
 
     # Aplicação do método
